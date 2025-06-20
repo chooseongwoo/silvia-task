@@ -18,6 +18,10 @@ export default function RootLayout() {
     <ThemeProvider value={DefaultTheme}>
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="test"
+          options={{ title: "테스트", headerBackTitle: "뒤로가기" }}
+        />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
