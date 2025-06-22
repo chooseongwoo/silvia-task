@@ -16,10 +16,10 @@ export default function TestScreen() {
       <QuestionBox
         {...currentQuestion}
         onClick={() => {
-          setCurrentIndex((prevIndex) => prevIndex + 1);
           if (currentIndex + 1 >= shuffledQuestions.length) {
             router.push("/result");
           }
+          setCurrentIndex((prevIndex) => prevIndex + 1);
         }}
       />
     </View>

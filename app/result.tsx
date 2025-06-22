@@ -1,11 +1,10 @@
+import { useResultStore } from "@/contexts/result";
 import { router } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ResultScreen() {
-  const correct = 9;
-  const wrong = 1;
-  const time = "00:42";
+  const { correct, wrong, time, reset } = useResultStore();
   const total = correct + wrong;
   const accuracy = Math.round((correct / total) * 100);
 
@@ -28,7 +27,13 @@ export default function ResultScreen() {
       </View>
 
       <Text style={styles.feedback}>{getFeedbackMessage()}</Text>
-      <Pressable style={styles.homeButton} onPress={() => router.replace("/")}>
+      <Pressable
+        style={styles.homeButton}
+        onPress={() => {
+          reset();
+          router.replace("/");
+        }}
+      >
         <Text style={styles.homeButtonText}>홈으로 돌아가기</Text>
       </Pressable>
     </SafeAreaView>

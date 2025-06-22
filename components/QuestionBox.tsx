@@ -38,7 +38,7 @@ export default function QuestionBox({
             color={option.colorHex}
             onClick={() => {
               onClick();
-              setSelectedColor(option.colorHex);
+              setSelectedColor(option.colorName);
               if (selectedColor === correctAnswer) {
                 increaseCorrect();
               } else {
