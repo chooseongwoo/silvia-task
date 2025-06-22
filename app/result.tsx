@@ -6,7 +6,7 @@ import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ResultScreen() {
-  const { correct, wrong, timeLeft } = useResultStore();
+  const { correct, wrong, timeLeft, reset } = useResultStore();
   const total = correct + wrong;
   const accuracy = Math.round((correct / total) * 100);
 
@@ -21,7 +21,7 @@ export default function ResultScreen() {
   const minutes = Math.floor(elapsed / 60);
   const seconds = elapsed % 60;
   const formatTime = `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
-  
+
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>검사 결과</Text>
@@ -37,6 +37,7 @@ export default function ResultScreen() {
       <Pressable
         style={styles.homeButton}
         onPress={() => {
+          reset();
           router.replace("/");
         }}
       >
