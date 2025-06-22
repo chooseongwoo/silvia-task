@@ -1,5 +1,6 @@
 import ColorButton from "@/components/ColorButton";
 import { colorOptions } from "@/constants/colorOptions";
+import { useResultStore } from "@/contexts/result";
 import { StroopQuestion } from "@/types/StroopQuestion";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -16,6 +17,8 @@ export default function QuestionBox({
   onClick,
 }: StroopQuestion & QuestionBoxProps) {
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
+
+  const { increaseCorrect, increaseWrong } = useResultStore();
 
   return (
     <View style={styles.container}>
@@ -37,7 +40,9 @@ export default function QuestionBox({
               onClick();
               setSelectedColor(option.colorHex);
               if (selectedColor === correctAnswer) {
-                // 상태 관리 로직
+                increaseCorrect();
+              } else {
+                increaseWrong();
               }
             }}
           />
