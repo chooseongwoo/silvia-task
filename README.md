@@ -1,50 +1,45 @@
-# Welcome to your Expo app 👋
+# 👋 Silvia Health 과제
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## 프로젝트 실행 방법
 
-## Get started
+### 1. 필수 환경 준비
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+- Node.js (버전 16 이상)
+- npm
+- [Expo CLI](https://docs.expo.dev/get-started/installation/) 설치:
 
 ```bash
-npm run reset-project
+npm install -g expo-cli
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+### 2. 프로젝트 클론 및 의존성 설치
 
-To learn more about developing your project with Expo, look at the following resources:
+```bash
+git clone [https://github.com/chooseongwoo/silvia-task.git]
+cd silvia-task
+npm install
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+### 3. 프로젝트 실행
 
-Join our community of developers creating universal apps.
+```bash
+npm start           # Expo 개발 서버
+npm run android     # 안드로이드
+npm run ios         # iOS
+npm run web         # 웹 브라우저
+```
+---
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 📁 주요 폴더 구조
+
+| 폴더          | 설명                                       |
+| ------------- | ------------------------------------------ |
+| `app/`        | 화면 컴포넌트 (페이지 단위) 및 라우팅 구성 |
+| `components/` | 재사용 가능한 UI 컴포넌트 모음             |
+| `contexts/`   | Zustand 상태 관리 스토어 정의              |
+| `constants/`  | 앱에서 공통으로 사용하는 상수 정의         |
+| `assets/`     | 이미지 및 정적 파일                        |
