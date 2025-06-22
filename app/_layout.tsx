@@ -22,6 +22,7 @@ export default function RootLayout() {
           name="test"
           options={{ title: "테스트", headerBackTitle: "뒤로가기" }}
         />
+        <Stack.Screen name="result" options={{ headerShown: false }} />
       </Stack>
       <StatusBar style="auto" />
     </ThemeProvider>
