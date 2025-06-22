@@ -1,14 +1,20 @@
 import QuestionBox from "@/components/QuestionBox";
 import Timer from "@/components/Timer";
+import { useResultStore } from "@/contexts/result";
 import { shuffledQuestions } from "@/data/stroopQuestions";
 import { StroopQuestion } from "@/types/StroopQuestion";
 import { router } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 
 export default function TestScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentQuestion: StroopQuestion = shuffledQuestions[currentIndex];
+  const { reset } = useResultStore();
+
+  useEffect(() => {
+    reset();
+  }, [reset]);
 
   return (
     <View style={styles.container}>
