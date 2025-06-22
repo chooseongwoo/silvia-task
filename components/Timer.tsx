@@ -7,6 +7,7 @@ import { StyleSheet, Text, View } from "react-native";
 export default function Timer() {
   const { timeLeft, setTimeLeft } = useResultStore();
 
+  // 타이머를 1초마다 감소시키며, 컴포넌트 언마운트 시 타이머 정리
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft((prev) => {
@@ -20,6 +21,7 @@ export default function Timer() {
     return () => clearInterval(timer);
   }, [setTimeLeft]);
 
+  // 남은 시간에 따라 프로그레스바의 너비 계산
   const progressWidth = (timeLeft / TOTAL_TIME) * (SCREEN_WIDTH - 30);
 
   return (

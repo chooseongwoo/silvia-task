@@ -10,6 +10,7 @@ export default function ResultScreen() {
   const total = correct + wrong;
   const accuracy = Math.round((correct / total) * 100);
 
+  // 검사 결과 피드백 메시지
   const getFeedbackMessage = () => {
     if (accuracy === 100) return "완벽한 결과예요!";
     if (accuracy >= 90) return "아주 정확해요!";
@@ -17,6 +18,7 @@ export default function ResultScreen() {
     return "조금 더 집중해보세요!";
   };
 
+  // 소요 시간 계산
   const elapsed = TOTAL_TIME - timeLeft;
   const minutes = Math.floor(elapsed / 60);
   const seconds = elapsed % 60;

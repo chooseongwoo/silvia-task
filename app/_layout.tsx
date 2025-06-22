@@ -9,8 +9,8 @@ export default function RootLayout() {
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
 
+  // 개발 중에만 비동기 글꼴 로딩이 발생합니다.
   if (!loaded) {
-    // Async font loading only occurs in development.
     return null;
   }
 
