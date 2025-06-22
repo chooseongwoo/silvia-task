@@ -24,8 +24,8 @@ export default function QuestionBox({
     <View style={styles.container}>
       <Text style={styles.instructionText}>
         {instruction === "COLOR"
-          ? "보기의 글자가 무슨 색으로 칠해져 있는지 골라주세요"
-          : "보기의 글자가 의미하는 색을 골라주세요"}
+          ? "보기의 글자가\n무슨 색으로 칠해져 있는지 골라주세요"
+          : "보기의 글자가\n의미하는 색을 골라주세요"}
       </Text>
       <View style={styles.exampleBox}>
         <Text style={styles.exampleTitle}>보기</Text>
