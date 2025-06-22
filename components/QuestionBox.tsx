@@ -1,26 +1,45 @@
 import ColorButton from "@/components/ColorButton";
 import { colorOptions } from "@/constants/colorOptions";
+import { StroopQuestion } from "@/types/StroopQuestion";
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function QuestionBox() {
-  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+interface QuestionBoxProps {
+  onClick: () => void;
+}
+
+export default function QuestionBox({
+  instruction,
+  word,
+  colorHex,
+  correctAnswer,
+  onClick,
+}: StroopQuestion & QuestionBoxProps) {
+  const [selectedColor, setSelectedColor] = useState<string | null>(null);
 
   return (
     <View style={styles.container}>
       <Text style={styles.instructionText}>
-        보기의 글자가 의미하는 색을 골라주세요
+        {instruction === "COLOR"
+          ? "보기의 글자가 무슨 색으로 칠해져 있는지 골라주세요"
+          : "보기의 글자가 의미하는 색을 골라주세요"}
       </Text>
       <View style={styles.exampleBox}>
         <Text style={styles.exampleTitle}>보기</Text>
-        <Text style={styles.exampleWord}>빨강</Text>
+        <Text style={[styles.exampleWord, { color: colorHex }]}>{word}</Text>
       </View>
       <View style={styles.colorOptions}>
         {colorOptions.map((option, index) => (
           <ColorButton
             key={index}
             color={option.colorHex}
-            onClick={() => setSelectedIndex(index)}
+            onClick={() => {
+              onClick();
+              setSelectedColor(option.colorHex);
+              if (selectedColor === correctAnswer) {
+                // 상태 관리 로직
+              }
+            }}
           />
         ))}
       </View>
