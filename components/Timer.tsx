@@ -1,21 +1,24 @@
 import TimerIcon from "@/components/ui/TimerIcon";
-import React, { useEffect, useState } from "react";
-import { Dimensions, StyleSheet, Text, View } from "react-native";
-
-const TOTAL_TIME = 60;
-const SCREEN_WIDTH = Dimensions.get("window").width;
+import { SCREEN_WIDTH, TOTAL_TIME } from "@/constants/timer";
+import { useResultStore } from "@/contexts/result";
+import React, { useEffect } from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 export default function Timer() {
-  const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
+  const { timeLeft, setTimeLeft } = useResultStore();
 
   useEffect(() => {
-    if (timeLeft > 0) {
-      const timer = setInterval(() => {
-        setTimeLeft((time) => time - 1);
-      }, 1000);
-      return () => clearInterval(timer);
-    }
-  }, [timeLeft]);
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [setTimeLeft]);
 
   const progressWidth = (timeLeft / TOTAL_TIME) * (SCREEN_WIDTH - 30);
 

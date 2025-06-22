@@ -1,10 +1,12 @@
+import ResultItem from "@/components/ResultItem";
+import { TOTAL_TIME } from "@/constants/timer";
 import { useResultStore } from "@/contexts/result";
 import { router } from "expo-router";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ResultScreen() {
-  const { correct, wrong, time, reset } = useResultStore();
+  const { correct, wrong, timeLeft } = useResultStore();
   const total = correct + wrong;
   const accuracy = Math.round((correct / total) * 100);
 
@@ -15,12 +17,17 @@ export default function ResultScreen() {
     return "조금 더 집중해보세요!";
   };
 
+  const elapsed = TOTAL_TIME - timeLeft;
+  const minutes = Math.floor(elapsed / 60);
+  const seconds = elapsed % 60;
+  const formatTime = `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
+  
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>검사 결과</Text>
 
       <View style={styles.resultBox}>
-        <ResultItem label="⏱ 소요 시간" value={time} />
+        <ResultItem label="⏱ 소요 시간" value={formatTime} />
         <ResultItem label="✅ 맞힌 문제" value={`${correct}개`} />
         <ResultItem label="❌ 틀린 문제" value={`${wrong}개`} />
         <ResultItem label="🎯 정답률" value={`${accuracy}%`} />
@@ -30,22 +37,12 @@ export default function ResultScreen() {
       <Pressable
         style={styles.homeButton}
         onPress={() => {
-          reset();
           router.replace("/");
         }}
       >
         <Text style={styles.homeButtonText}>홈으로 돌아가기</Text>
       </Pressable>
     </SafeAreaView>
-  );
-}
-
-function ResultItem({ label, value }: { label: string; value: string }) {
-  return (
-    <View style={styles.resultItem}>
-      <Text style={styles.resultLabel}>{label}</Text>
-      <Text style={styles.resultValue}>{value}</Text>
-    </View>
   );
 }
 
@@ -66,19 +63,6 @@ const styles = StyleSheet.create({
   resultBox: {
     gap: 24,
     marginBottom: 50,
-  },
-  resultItem: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  resultLabel: {
-    fontSize: 20,
-    color: "#555",
-  },
-  resultValue: {
-    fontSize: 20,
-    fontWeight: "bold",
-    color: "#111",
   },
   feedback: {
     fontSize: 22,

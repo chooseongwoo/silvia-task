@@ -10,11 +10,17 @@ import { StyleSheet, View } from "react-native";
 export default function TestScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const currentQuestion: StroopQuestion = shuffledQuestions[currentIndex];
-  const { reset } = useResultStore();
+  const { reset, timeLeft } = useResultStore();
 
   useEffect(() => {
     reset();
   }, [reset]);
+
+  useEffect(() => {
+    if (timeLeft <= 0) {
+      router.replace("/result");
+    }
+  }, [timeLeft]);
 
   return (
     <View style={styles.container}>
@@ -23,9 +29,9 @@ export default function TestScreen() {
         {...currentQuestion}
         onClick={() => {
           if (currentIndex + 1 >= shuffledQuestions.length) {
-            router.push("/result");
+            router.replace("/result");
           }
-          setCurrentIndex((prevIndex) => prevIndex + 1);
+          setCurrentIndex((prev) => prev + 1);
         }}
       />
     </View>
