@@ -1,5 +1,5 @@
 import { QuestionType, StroopQuestion } from "@/types/StroopQuestion";
-
+import { shuffleArray } from "@/utils/shuffleArray";
 const stroopQuestions: StroopQuestion[] = [];
 
 const colorOptions = [
@@ -26,3 +26,5 @@ for (const instruction of instructions) {
     }
   }
 }
+
+export const shuffledQuestions = shuffleArray(stroopQuestions);
