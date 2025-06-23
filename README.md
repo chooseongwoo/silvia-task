@@ -17,7 +17,7 @@ npm install -g expo-cli
 ### 2. 프로젝트 클론 및 의존성 설치
 
 ```bash
-git clone [https://github.com/chooseongwoo/silvia-task.git]
+git clone https://github.com/chooseongwoo/silvia-task.git
 cd silvia-task
 npm install
 ```
